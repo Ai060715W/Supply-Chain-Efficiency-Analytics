@@ -21,8 +21,7 @@
 
 ### 🔧 **2. 数据清洗 & ETL**
 
-* 使用 Pandas 清洗原始 CSV 数据
-* 将清洗结果写入 SQLite 数据库（supply_chain.db）
+* 将结果写入 SQLite 数据库（supply_chain.db）
 * 完整 ETL 流程可复用
 
 ### 📊 **3. SQL 分析**
@@ -144,8 +143,11 @@ dashboards/efficiency_dashboard.html
 
 ---
 
-## 📸 Dashboard 示例（截图建议你后续自己加）
+## 📸 Dashboard 示例
 
+<img width="1905" height="335" alt="image" src="https://github.com/user-attachments/assets/472d298d-251c-45cd-ba38-dff0a37a0049" />
+<img width="1912" height="1000" alt="image" src="https://github.com/user-attachments/assets/fcbb1e5b-d4e3-4215-9510-91ce45cf59f4" />
+<img width="1912" height="1000" alt="image" src="https://github.com/user-attachments/assets/b5a4b454-1017-4a0b-9056-a7752f3d4f5b" />
 
 
 ---

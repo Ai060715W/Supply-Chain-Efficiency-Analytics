@@ -1,4 +1,3 @@
-# dashboard.py
 import os
 import pickle
 import plotly.express as px

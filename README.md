@@ -58,7 +58,7 @@ dashboards/efficiency_dashboard.html
 | 编程语言 | Python                    |
 | 数据处理 | Pandas                    |
 | 数据库  | SQLite                    |
-| 可视化  | Plotly（本地 JS 版本，可离线打开）    |
+| 可视化  | Plotly    |
 | 运行环境 | VS Code  |
 
 ---

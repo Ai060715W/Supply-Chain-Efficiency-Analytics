@@ -22,24 +22,29 @@ Python / Pandas / SQLite / Plotly
 
 ---
 
-Supply-Chain-Efficiency-Analytics
-├── data
-│   ├── raw/
-│   └── processed/
+Supply-Chain-Efficiency-Analytics/
 ├── dashboards/
-│   └── efficiency_dashboard.html        # 运行 dashboard.py 新生成
+│   ├── eda_results.pkl
+│   ├── efficiency_dashboard.html
+│   └── modeling_results.pkl
+├── data/
+│   └── raw/
+│       ├── inbound_records.csv
+│       ├── inventory.csv
+│       ├── products.csv
+│       ├── purchase_orders.csv
+│       ├── sales_orders.csv
+│       └── suppliers.csv
 ├── notebooks/
 │   ├── EDA.ipynb
 │   └── Modeling.ipynb
 ├── sql/
-│   ├── schema.sql
-│   └── analysis_queries.sql
+│   ├── analysis_queries.sql
+│   └── schema.sql
 ├── src/
-│   ├── generate_mock_data.py
-│   ├── data_cleaning.py
-│   ├── etl_pipeline.py
+│   ├── dashboard.py
 │   ├── efficiency_metrics.py
-│   └── dashboard.py
-├── supply_chain.db                     
-├── requirements.txt
+│   ├── etl_pipeline.py
+│   └── generate_mock_data.py
+├── supply_chain.db
 └── README.md

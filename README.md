@@ -70,6 +70,7 @@ Supply-Chain-Efficiency-Analytics/
 ├── dashboards/
 │ ├── inventory_analysis_results.pkl
 │ ├── modeling_results.pkl
+│ ├── style.css
 │ └── supply_chain_dashboard.html
 ├── data/
 │ └── raw/

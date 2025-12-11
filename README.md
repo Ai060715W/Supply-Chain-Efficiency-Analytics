@@ -27,8 +27,7 @@
 ### 📊 **3. SQL 分析**
 
 * 多维度供应链效率指标：
-
-  * 库存周转率
+  
   * 缺货率
   * 平均采购提前期
   * 订单履约率
@@ -47,6 +46,7 @@
 
 ```
 dashboards/efficiency_dashboard.html
+dashboards/style.css
 ```
 
 ---
@@ -139,6 +139,7 @@ python src/dashboard.py
 
 ```
 dashboards/efficiency_dashboard.html
+dashboards/style.css
 ```
 
 可直接使用浏览器打开查看最终分析效果。
@@ -152,8 +153,6 @@ dashboards/efficiency_dashboard.html
 <img width="1354" height="720" alt="image" src="https://github.com/user-attachments/assets/9a808b7f-2b0b-4f42-b0c0-50c510c99724" />
 <img width="1356" height="937" alt="image" src="https://github.com/user-attachments/assets/7ce1c4c8-12d5-4f93-91dd-4b837339f37b" />
 <img width="1227" height="357" alt="image" src="https://github.com/user-attachments/assets/4dc0360f-7a12-4115-821f-1e3d2ce6ad72" />
-
-
 
 ---
 

@@ -26,27 +26,32 @@
 
 ### 📊 **3. SQL 分析**
 
-* 多维度供应链效率指标：
+* 多维度供应链效率指标与分析：
   
-  * 缺货率
-  * 平均采购提前期
-  * 订单履约率
-  * 供应商准时交货率
+  * 产品采购与销售数量统计
+  * 库存余量与分布情况
+  * 产品入库及时率分析
+  * 库存不足报警（低于安全库存的产品）
+  * 供应商绩效评估（评分、采购数量）
+  * 库存周转率计算
+  * 仓库库存占用率分析
+  * 供应商交货及时率统计
+  * 近期（7天）库存告急产品预警
 
 ### 📈 **4. 可视化 Dashboard（Plotly）**
 
-* KPI 指标卡
-* 库存趋势图（折线图）
-* 采购提前期分布（箱线图 / 分布图）
-* 订单履约漏斗（Funnel）
-* SKU 积压/畅销热力图（Heatmap）
-* 供应商绩效排行榜
+* **KPI 概览面板**：SKU总数、正常SKU、积压SKU、严重积压SKU、异常率等指标卡片
+* **库存热力图扫描**：全SKU月度库存天数热力图，直观展示库存健康状况
+* **积压原因分析**：异常SKU积压原因分布饼图、各品类库存健康度对比柱状图
+* **单品深度分析**：异常SKU的详细分析图表，包括库存趋势与销售对比
+* **品类对比分析**：同类目异常SKU的对比分析
+* **优化建议清单**：所有异常SKU的落地优化建议表格
 
 生成的 Dashboard 会导出为：
 
 ```
-dashboards/efficiency_dashboard.html
-dashboards/style.css
+dashboards/supply_chain_dashboard.html
+dashboards/styles.css
 ```
 
 ---
@@ -56,10 +61,13 @@ dashboards/style.css
 | 模块   | 技术                        |
 | ---- | ------------------------- |
 | 编程语言 | Python                    |
-| 数据处理 | Pandas                    |
+| 数据处理 | Pandas、NumPy             |
 | 数据库  | SQLite                    |
-| 可视化  | Plotly    |
-| 运行环境 | VS Code  |
+| 数据查询 | SQL                       |
+| 可视化  | Plotly                    |
+| 日期处理 | python-dateutil           |
+| 前端展示 | HTML5、CSS3   |
+| 数据分析 | Jupyter Notebook（.ipynb）|
 
 ---
 

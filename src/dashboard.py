@@ -9,6 +9,9 @@ DASHBOARD_DIR = os.path.join(PROJECT_ROOT, 'dashboards')
 os.makedirs(DASHBOARD_DIR, exist_ok=True)
 OUTPUT_FILE = os.path.join(DASHBOARD_DIR, 'supply_chain_dashboard.html')
 
+# 输出 CSS 文件路径
+CSS_FILE = os.path.join(DASHBOARD_DIR, 'styles.css')
+
 # ============================================
 # 读取 EDA 分析结果
 # ============================================
@@ -90,6 +93,8 @@ fig_health_by_category.update_layout(
 # ============================================
 # 构建 HTML 标签页内容
 # ============================================
+
+# html_content will be assembled after individual tab HTML blocks are defined
 
 # Tab 1: 概览面板 - KPI 卡片
 overview_html = f"""
@@ -226,8 +231,248 @@ suggestions_table_html += """
 """
 
 # ============================================
-# 生成完整 HTML
+# 生成 CSS 样式
 # ============================================
+CSS_CONTENT = '''
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 40px 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 14px;
+    opacity: 0.95;
+}
+
+.kpi-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.kpi-card {
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.kpi-card:hover {
+    transform: translateY(-5px);
+}
+
+.kpi-card h4 {
+    font-size: 13px;
+    color: rgba(0,0,0,0.6);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.kpi-value {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.kpi-percent {
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+.kpi-normal { background: linear-gradient(135deg, #e0e7ff 0%, #f0f4ff 100%); color: #3f51b5; }
+.kpi-success { background: linear-gradient(135deg, #c8e6c9 0%, #e8f5e9 100%); color: #2e7d32; }
+.kpi-warning { background: linear-gradient(135deg, #ffe0b2 0%, #fff3e0 100%); color: #e65100; }
+.kpi-danger { background: linear-gradient(135deg, #ffcdd2 0%, #ffebee 100%); color: #c62828; }
+.kpi-info { background: linear-gradient(135deg, #e1bee7 0%, #f3e5f5 100%); color: #4a148c; }
+
+/* Tab 导航 */
+.tab-navigation {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    background: white;
+    padding: 15px 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    padding: 12px 24px;
+    border: none;
+    background: #f0f0f0;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    color: #333;
+}
+
+.tab-btn:hover {
+    background: #e0e0e0;
+}
+
+.tab-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+/* Tab 内容 */
+.tab-content {
+    display: none;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    animation: fadeIn 0.3s ease;
+    overflow-x: auto;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.tab-content h2 {
+    color: #667eea;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #667eea;
+    padding-bottom: 10px;
+}
+
+.tab-content h3 {
+    color: #764ba2;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+/* Plotly 图表响应式 */
+.plotly-graph-div {
+    max-width: 100%;
+    height: auto !important;
+}
+
+/* 表格样式 */
+.suggestions-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 13px;
+}
+
+.suggestions-table thead {
+    background-color: #667eea;
+    color: white;
+}
+
+.suggestions-table th {
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.suggestions-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.suggestions-table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+.sku-cell {
+    color: #667eea;
+    font-weight: bold;
+}
+
+.category-badge {
+    display: inline-block;
+    background: #e3f2fd;
+    color: #1565c0;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.reason-badge {
+    display: inline-block;
+    background: #ffebee;
+    color: #c62828;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.suggestion-cell {
+    color: #2e7d32;
+    line-height: 1.8;
+}
+
+@media (max-width: 1024px) {
+    .suggestions-table {
+        font-size: 12px;
+    }
+    .suggestions-table th, 
+    .suggestions-table td {
+        padding: 8px 10px;
+    }
+    .kpi-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+footer {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px;
+    color: #666;
+    border-top: 1px solid #ddd;
+    font-size: 12px;
+}
+'''
+
+
+# 组装最终 HTML（放在生成各 Tab 内容之后，确保变量已定义）
 html_content = f"""
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -235,244 +480,7 @@ html_content = f"""
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>供应链库存效率 Dashboard</title>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <style>
-        * {{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }}
-        
-        body {{
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            color: #333;
-            line-height: 1.6;
-        }}
-        
-        .container {{
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-        }}
-        
-        header {{
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 40px 20px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-        }}
-        
-        header h1 {{
-            font-size: 36px;
-            margin-bottom: 10px;
-        }}
-        
-        header p {{
-            font-size: 14px;
-            opacity: 0.95;
-        }}
-        
-        .kpi-container {{
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }}
-        
-        .kpi-card {{
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            text-align: center;
-            transition: transform 0.3s ease;
-        }}
-        
-        .kpi-card:hover {{
-            transform: translateY(-5px);
-        }}
-        
-        .kpi-card h4 {{
-            font-size: 13px;
-            color: rgba(0,0,0,0.6);
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }}
-        
-        .kpi-value {{
-            font-size: 32px;
-            font-weight: bold;
-            margin: 10px 0;
-        }}
-        
-        .kpi-percent {{
-            font-size: 12px;
-            opacity: 0.7;
-        }}
-        
-        .kpi-normal {{ background: linear-gradient(135deg, #e0e7ff 0%, #f0f4ff 100%); color: #3f51b5; }}
-        .kpi-success {{ background: linear-gradient(135deg, #c8e6c9 0%, #e8f5e9 100%); color: #2e7d32; }}
-        .kpi-warning {{ background: linear-gradient(135deg, #ffe0b2 0%, #fff3e0 100%); color: #e65100; }}
-        .kpi-danger {{ background: linear-gradient(135deg, #ffcdd2 0%, #ffebee 100%); color: #c62828; }}
-        .kpi-info {{ background: linear-gradient(135deg, #e1bee7 0%, #f3e5f5 100%); color: #4a148c; }}
-        
-        /* Tab 导航 */
-        .tab-navigation {{
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-            background: white;
-            padding: 15px 20px;
-            border-radius: 12px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            flex-wrap: wrap;
-        }}
-        
-        .tab-btn {{
-            padding: 12px 24px;
-            border: none;
-            background: #f0f0f0;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            color: #333;
-        }}
-        
-        .tab-btn:hover {{
-            background: #e0e0e0;
-        }}
-        
-        .tab-btn.active {{
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-        }}
-        
-        /* Tab 内容 */
-        .tab-content {{
-            display: none;
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            animation: fadeIn 0.3s ease;
-            overflow-x: auto;
-        }}
-        
-        .tab-content.active {{
-            display: block;
-        }}
-        
-        @keyframes fadeIn {{
-            from {{ opacity: 0; }}
-            to {{ opacity: 1; }}
-        }}
-        
-        .tab-content h2 {{
-            color: #667eea;
-            margin-bottom: 20px;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 10px;
-        }}
-        
-        .tab-content h3 {{
-            color: #764ba2;
-            margin-top: 30px;
-            margin-bottom: 15px;
-        }}
-        
-        /* Plotly 图表响应式 */
-        .plotly-graph-div {{
-            max-width: 100%;
-            height: auto !important;
-        }}
-        
-        /* 表格样式 */
-        .suggestions-table {{
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            font-size: 13px;
-        }}
-        
-        .suggestions-table thead {{
-            background-color: #667eea;
-            color: white;
-        }}
-        
-        .suggestions-table th {{
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }}
-        
-        .suggestions-table td {{
-            padding: 12px 15px;
-            border-bottom: 1px solid #e0e0e0;
-        }}
-        
-        .suggestions-table tbody tr:hover {{
-            background-color: #f9f9f9;
-        }}
-        
-        .sku-cell {{
-            color: #667eea;
-            font-weight: bold;
-        }}
-        
-        .category-badge {{
-            display: inline-block;
-            background: #e3f2fd;
-            color: #1565c0;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 500;
-        }}
-        
-        .reason-badge {{
-            display: inline-block;
-            background: #ffebee;
-            color: #c62828;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 500;
-        }}
-        
-        .suggestion-cell {{
-            color: #2e7d32;
-            line-height: 1.8;
-        }}
-        
-        @media (max-width: 1024px) {{
-            .suggestions-table {{
-                font-size: 12px;
-            }}
-            .suggestions-table th, 
-            .suggestions-table td {{
-                padding: 8px 10px;
-            }}
-            .kpi-container {{
-                grid-template-columns: repeat(2, 1fr);
-            }}
-        }}
-        
-        footer {{
-            text-align: center;
-            margin-top: 50px;
-            padding: 20px;
-            color: #666;
-            border-top: 1px solid #ddd;
-            font-size: 12px;
-        }}
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
@@ -525,14 +533,20 @@ html_content = f"""
 </html>
 """
 
+
 # ============================================
 # 保存 HTML
 # ============================================
+# 先保存外部 CSS 文件
+with open(CSS_FILE, 'w', encoding='utf-8') as f_css:
+    f_css.write(CSS_CONTENT)
+
+print(f"✅ 已写入样式表：{CSS_FILE}")
+
 with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
     f.write(html_content)
 
 print("✅ [完成] 供应链库存效率一体化 Dashboard 已生成")
-print(f"📁 输出路径：{OUTPUT_FILE}")
 print(f"\n📑 Dashboard 包含 6 个 Tab 页面：")
 print(f"   1️⃣  KPI 概览 - 库存健康度统计卡片")
 print(f"   2️⃣  热力图扫描 - 全 SKU 月度库存天数热力图")

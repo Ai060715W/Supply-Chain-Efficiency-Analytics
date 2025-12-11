@@ -68,30 +68,31 @@ dashboards/efficiency_dashboard.html
 ```
 Supply-Chain-Efficiency-Analytics/
 ├── dashboards/
-│   ├── eda_results.pkl
-│   ├── modeling_results.pkl
-│   └── efficiency_dashboard.html
+│ ├── inventory_analysis_results.pkl
+│ ├── modeling_results.pkl
+│ └── supply_chain_dashboard.html
 ├── data/
-│   └── raw/
-│       ├── inbound_records.csv
-│       ├── inventory.csv
-│       ├── products.csv
-│       ├── purchase_orders.csv
-│       ├── sales_orders.csv
-│       └── suppliers.csv
+│ └── raw/
+│ ├── inbound_records.csv
+│ ├── inventory.csv
+│ ├── products.csv
+│ ├── purchase_orders.csv
+│ ├── sales_orders.csv
+│ └── suppliers.csv
 ├── notebooks/
-│   ├── EDA.ipynb
-│   └── Modeling.ipynb
+│ ├── EDA.ipynb
+│ └── Modeling.ipynb
 ├── sql/
-│   ├── schema.sql
-│   └── analysis_queries.sql
+│ ├── analysis_queries.sql
+│ └── schema.sql
 ├── src/
-│   ├── dashboard.py
-│   ├── efficiency_metrics.py
-│   ├── etl_pipeline.py
-│   └── generate_mock_data.py
-├── supply_chain.db
-└── README.md
+│ ├── dashboard.py
+│ ├── etl_pipeline.py
+│ ├── generate_mock_data.py
+│ └── efficiency_metrics.py
+├── README.md
+├── requirements.txt
+└── supply_chain.db
 ```
 
 ---

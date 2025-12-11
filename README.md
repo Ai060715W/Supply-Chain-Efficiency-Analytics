@@ -147,9 +147,12 @@ dashboards/efficiency_dashboard.html
 
 ## 📸 Dashboard 示例
 
-<img width="1905" height="335" alt="image" src="https://github.com/user-attachments/assets/472d298d-251c-45cd-ba38-dff0a37a0049" />
-<img width="1912" height="1000" alt="image" src="https://github.com/user-attachments/assets/fcbb1e5b-d4e3-4215-9510-91ce45cf59f4" />
-<img width="1912" height="1000" alt="image" src="https://github.com/user-attachments/assets/b5a4b454-1017-4a0b-9056-a7752f3d4f5b" />
+<img width="1911" height="706" alt="image" src="https://github.com/user-attachments/assets/7f93361f-f884-4f1a-a72b-dd4f2edf0898" />
+<img width="1357" height="741" alt="image" src="https://github.com/user-attachments/assets/d64df813-f511-44f4-be0f-b4884efd618e" />
+<img width="1354" height="720" alt="image" src="https://github.com/user-attachments/assets/9a808b7f-2b0b-4f42-b0c0-50c510c99724" />
+<img width="1356" height="937" alt="image" src="https://github.com/user-attachments/assets/7ce1c4c8-12d5-4f93-91dd-4b837339f37b" />
+<img width="1227" height="357" alt="image" src="https://github.com/user-attachments/assets/4dc0360f-7a12-4115-821f-1e3d2ce6ad72" />
+
 
 
 ---

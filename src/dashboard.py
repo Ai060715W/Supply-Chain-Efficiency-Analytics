@@ -101,7 +101,7 @@ overview_html = f"""
 <div class="tab-content active" id="overview">
     <div class="kpi-container">
         <div class="kpi-card kpi-normal">
-            <h4>SKU 总数</h4>
+            <h4>异常 SKU 总数</h4>
             <p class="kpi-value">{total_skus}</p>
         </div>
         <div class="kpi-card kpi-success">
@@ -128,10 +128,10 @@ overview_html = f"""
 </div>
 """
 
-# Tab 2: 全 SKU 热力图 - 优化显示
+# Tab 2: 全 SKU 热力图 
 heatmap_html = f"""
 <div class="tab-content" id="heatmap">
-    <h2>全 SKU 月度库存天数热力图（全局扫描）</h2>
+    <h2>SKU 库存天数热力图（全局扫描）</h2>
     <p style="color:#666; margin-bottom:20px; font-size:13px;">
         <span style="display:inline-block; margin-right:20px;">✓ <span style="color:#1e90ff;">浅蓝</span> = 0-100天（正常库存）</span>
         <span style="display:inline-block; margin-right:20px;">✓ <span style="color:#ff8c00;">橙色</span> = 100-500天（积压）</span>
@@ -143,7 +143,7 @@ heatmap_html = f"""
 </div>
 """
 
-# Tab 3: 分析概览 - 改为 include_plotlyjs=False
+# Tab 3: 分析概览 
 analysis_overview_html = f"""
 <div class="tab-content" id="analysis">
     <h2>积压原因分析</h2>

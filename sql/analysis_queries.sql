@@ -50,17 +50,7 @@ GROUP BY s.supplier_id, s.supplier_name, s.rating
 ORDER BY total_purchased DESC;
 
 -- ------------------------------
--- 7. 最近30天销售情况
--- ------------------------------
-SELECT product_id, SUM(quantity_sold) AS sold_last_30_days
-FROM sales_orders
-WHERE sales_order_date >= DATE('now', '-30 days')
-GROUP BY product_id
-ORDER BY sold_last_30_days DESC;
-
-
--- ------------------------------
--- 8. 产品库存周转率（Stock Turnover Rate）
+-- 7. 产品库存周转率（Stock Turnover Rate）
 -- ------------------------------
 WITH avg_inventory AS (
     SELECT product_id, AVG(quantity) AS avg_qty
@@ -81,7 +71,7 @@ JOIN avg_inventory a ON t.product_id = a.product_id
 ORDER BY stock_turnover_ratio DESC;
 
 -- ------------------------------
--- 9. 仓库库存占用率
+-- 8. 仓库库存占用率
 -- ------------------------------
 WITH total_inventory AS (
     SELECT SUM(quantity) AS total_qty
@@ -95,7 +85,7 @@ GROUP BY warehouse_location
 ORDER BY inventory_ratio DESC;
 
 -- ------------------------------
--- 10. 供应商交货及时率（On-time Delivery Rate）
+-- 9. 供应商交货及时率（On-time Delivery Rate）
 -- ------------------------------
 SELECT s.supplier_id, s.supplier_name,
        COUNT(ir.inbound_id) AS total_orders,
@@ -106,15 +96,3 @@ JOIN purchase_orders po ON s.supplier_id = po.supplier_id
 JOIN inbound_records ir ON po.purchase_order_id = ir.purchase_order_id
 GROUP BY s.supplier_id, s.supplier_name
 ORDER BY on_time_rate DESC;
-
--- ------------------------------
--- 11. 最近 7 天库存告急产品
--- ------------------------------
-SELECT i.product_id, p.product_name, SUM(i.quantity) AS total_inventory, p.safety_stock
-FROM inventory i
-JOIN products p ON i.product_id = p.product_id
-JOIN sales_orders s ON i.product_id = s.product_id
-WHERE s.sales_order_date >= DATE('now', '-7 days')
-GROUP BY i.product_id, p.product_name, p.safety_stock
-HAVING total_inventory < p.safety_stock
-ORDER BY total_inventory ASC;

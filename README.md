@@ -1,6 +1,6 @@
-# 📦 端到端供应链效率分析系统
+# 📦 End-to-End Supply Chain Efficiency Analytics Platform
 
-**End-to-End Supply Chain Efficiency Analytics Platform**
+**端到端供应链效率分析系统**
 
 ---
 
@@ -36,7 +36,6 @@
   * 库存周转率计算
   * 仓库库存占用率分析
   * 供应商交货及时率统计
-  * 近期（7天）库存告急产品预警
 
 ### 📈 **4. 可视化 Dashboard（Plotly）**
 
@@ -97,8 +96,7 @@ Supply-Chain-Efficiency-Analytics/
 ├── src/
 │ ├── dashboard.py
 │ ├── etl_pipeline.py
-│ ├── generate_mock_data.py
-│ └── efficiency_metrics.py
+│ └── generate_mock_data.py
 ├── README.md
 ├── requirements.txt
 └── supply_chain.db

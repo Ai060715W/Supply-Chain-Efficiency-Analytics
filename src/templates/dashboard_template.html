@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>供应链库存效率 Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 供应链库存效率 Dashboard</h1>
+            <p>基于全 SKU 库存天数分析，定位积压异常、深挖根因、输出优化建议</p>
+        </header>
+        
+        <!-- Tab 导航 -->
+        <div class="tab-navigation">
+            <button class="tab-btn active" onclick="showTab('overview')">📈 KPI 概览</button>
+            <button class="tab-btn" onclick="showTab('heatmap')">🔥 热力图扫描</button>
+            <button class="tab-btn" onclick="showTab('analysis')">🔍 原因分析</button>
+            <button class="tab-btn" onclick="showTab('single-sku')">📋 单品分析</button>
+            <button class="tab-btn" onclick="showTab('category-compare')">📊 品类对比</button>
+            <button class="tab-btn" onclick="showTab('suggestions')">💡 优化建议</button>
+        </div>
+        
+        <!-- Tab 内容 -->
+        {{overview_html}}
+        {{heatmap_html}}
+        {{analysis_overview_html}}
+        {{single_sku_html}}
+        {{category_comparison_html}}
+        {{suggestions_table_html}}
+        
+        <footer>
+            <p>生成时间：{{timestamp}} | 供应链效率分析系统</p>
+        </footer>
+    </div>
+    
+    <script>
+        function showTab(tabName) {
+            // 隐藏所有 tab 内容
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // 移除所有 button 的 active 类
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // 显示选中的 tab
+            document.getElementById(tabName).classList.add('active');
+            
+            // 添加 active 类到点击的 button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

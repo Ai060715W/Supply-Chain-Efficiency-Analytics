@@ -65,7 +65,8 @@ dashboards/styles.css
 | 数据查询 | SQL                       |
 | 可视化  | Plotly                    |
 | 日期处理 | python-dateutil           |
-| 前端展示 | HTML5、CSS3   |
+| 前端展示 | HTML5、CSS3               |
+| 模板系统 | 自定义模板渲染（基于字符串替换） |
 | 数据分析 | Jupyter Notebook（.ipynb）|
 
 ---
@@ -96,7 +97,11 @@ Supply-Chain-Efficiency-Analytics/
 ├── src/
 │ ├── dashboard.py
 │ ├── etl_pipeline.py
-│ └── generate_mock_data.py
+│ ├── generate_mock_data.py
+│ ├── static/
+│ │ └── styles.css
+│ └── templates/
+│     └── dashboard_template.html
 ├── README.md
 ├── requirements.txt
 └── supply_chain.db
@@ -144,8 +149,8 @@ python src/dashboard.py
 生成可交互 Dashboard：
 
 ```
-dashboards/efficiency_dashboard.html
-dashboards/style.css
+dashboards/supply_chain_dashboard.html
+dashboards/styles.css
 ```
 
 可直接使用浏览器打开查看最终分析效果。
